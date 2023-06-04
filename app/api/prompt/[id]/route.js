@@ -43,11 +43,8 @@ export const DELETE = async (request, {params}) => {
     
         try {
             await connectToDB();
-            const prompt = await Prompt.findById(params.id).populate('creator')
     
-            if(!prompt) return new Response("Prompt not found", { status: 404 })
-    
-            await prompt.remove();
+            await Prompt.findByIdAndRemove(params.id);
     
             return new Response(JSON.stringify(prompt), { status: 204 })
     
