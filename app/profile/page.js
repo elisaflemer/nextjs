@@ -15,6 +15,7 @@ const MyProfile = () => {
       console.log(session?.user.id)
       const res = await fetch(`/api/users/${session?.user.id}/posts`);
       const data = await res.json();
+      console.log(data)
       setPosts(data);
     }
     if (session?.user.id) fetchPosts()
@@ -26,7 +27,6 @@ const MyProfile = () => {
   const handleDelete = async () => {
     
   }
-  console.log(posts)
 
   return (
     <Profile

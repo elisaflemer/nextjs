@@ -8,6 +8,7 @@ import { set } from "mongoose"
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
     const [copied, setCopied] = useState('')
+    const { data: session } = useSession();
 
     const handleCopy = () => {
         setCopied(post.prompt)
@@ -31,6 +32,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         </div>
         <p className='my-4 font-satoshi text-sm text-gray-700'>{post.prompt}</p>
         <p className="font-inter text-sm blue_gradient cursor-pointer" onClick={() => handleTagClick && handleTagClick(post.tag)}>{post.tag}</p>
+
+        {session?.user?.id === post.creator._id && (
+            <div>
+                <p className="font-inter text-sm green_gradient cursor-pointer" onClick={handleEdit}>Edit</p>
+                <p className="font-inter text-sm orange_gradient cursor-pointer" onClick={handleDelete}>Delete</p>
+            </div>
+            )
+            }
     </div>
   )
 }
